@@ -1,0 +1,23 @@
+<resources>
+    <string name="app_name">iParking</string>
+    <string name="welcome_msg">智慧停车</string>
+
+
+    <string name="phone_hint">请输入手机号</string>
+    <string name="inputpwd_hint">请输入密码</string>
+    <string name="verifycode_hint">验证码</string>
+    <string name="setpwd_hint">设置登录密码</string>
+    <string name="confirmpwd_hint">再次输入密码</string>
+
+    <string name="login_ok">登录</string>
+    <string name="register_ok"><![CDATA[注册]]></string>
+
+
+    <string name="savedpwd_check">记住账号密码</string>
+
+    <string name="forgetpwd_msg">忘记密码？</string>
+    <string name="register_msg"><![CDATA[注册用户>]]></string>
+    <string name="getverifycode_msg">获取验证码</string>
+
+
+</resources>
