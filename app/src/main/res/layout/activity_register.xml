@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".RegisterActivity">
+    tools:context=".activity.RegisterActivity">
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline16"
@@ -49,7 +49,7 @@
         app:layout_constraintGuide_percent="0.5" />
 
     <EditText
-        android:id="@+id/phone"
+        android:id="@+id/input_mobile"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:ems="10"
