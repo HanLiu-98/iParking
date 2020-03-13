@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mobile_navigation"
+    app:startDestination="@id/navigation_home">
+
+    <fragment
+        android:id="@+id/navigation_home"
+        android:name="xyz.hanliu.iparking.home.fragment.HomeFragment"
+        android:label="寻找车位"
+        tools:layout="@layout/fragment_home" />
+    <fragment
+        android:id="@+id/navigation_add"
+        android:name="xyz.hanliu.iparking.release.fragment.ReleaseFragment"
+        android:label="发布车位"
+        tools:layout="@layout/fragment_release" />
+    <fragment
+        android:id="@+id/navigation_user"
+        android:name="xyz.hanliu.iparking.user.fragment.UserFragment"
+        android:label="个人中心"
+        tools:layout="@layout/fragment_user" />
+    <!--    <fragment-->
+    <!--        android:id="@+id/navigation_message"-->
+    <!--        android:name="xyz.hanliu.iparking.message.fragment.MessageFragment"-->
+    <!--        android:label="fragment_message"-->
+    <!--        tools:layout="@layout/fragment_message" />-->
+</navigation>

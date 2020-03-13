@@ -5,8 +5,9 @@
 
     <string name="phone_hint">请输入手机号</string>
     <string name="inputpwd_hint">请输入密码</string>
-    <string name="verifycode_hint">验证码</string>
+    <string name="verifycode_hint">请输入获取的验证码</string>
     <string name="setpwd_hint">设置登录密码</string>
+    <string name="setnewpwd_hint">设置新的登录密码</string>
     <string name="confirmpwd_hint">再次输入密码</string>
 
     <string name="login_ok">登录</string>
@@ -16,7 +17,9 @@
     <string name="savedpwd_check">记住账号密码</string>
 
     <string name="forgetpwd_msg">忘记密码？</string>
+    <string name="forgetpwd_msg_bar">忘记密码</string>
     <string name="register_msg"><![CDATA[注册用户>]]></string>
+    <string name="register_msg_bar">注册用户</string>
     <string name="getverifycode_msg">获取验证码</string>
 
 
@@ -26,6 +29,11 @@
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="input_nickname_hint">设置昵称</string>
+    <string name="input_fullname_hint">请输入真实姓名</string>
+    <string name="ok_resetpwd">确认重置密码</string>
+    <string name="input_newpwd">请输入新密码</string>
+    <string name="money">￥</string>
 
 
 </resources>

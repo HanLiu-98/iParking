@@ -4,113 +4,116 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".activity.ResetpwdActivity">
+    android:paddingLeft="10dp"
+    android:paddingRight="10dp"
+    tools:context=".app.ResetpwdActivity">
 
     <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline16"
+        android:id="@+id/guideline07"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         app:layout_constraintGuide_percent="0.65" />
 
     <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline14"
+        android:id="@+id/guideline01"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         app:layout_constraintGuide_percent="0.1" />
 
     <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline13"
+        android:id="@+id/guideline03"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         app:layout_constraintGuide_percent="0.3" />
 
     <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline12"
+        android:id="@+id/guideline02"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         app:layout_constraintGuide_percent="0.20109439" />
 
     <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline11"
+        android:id="@+id/guideline04"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         app:layout_constraintGuide_percent="0.4" />
 
     <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline15"
+        android:id="@+id/guideline05"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         app:layout_constraintGuide_percent="0.5" />
 
     <EditText
-        android:id="@+id/input_mobile"
+        android:id="@+id/input_mobile_resetpwd"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:ems="10"
         android:hint="@string/phone_hint"
         android:inputType="number"
-        app:layout_constraintBottom_toTopOf="@+id/guideline12"
+        app:layout_constraintBottom_toTopOf="@+id/guideline02"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/guideline14" />
+        app:layout_constraintTop_toTopOf="@+id/guideline01" />
 
     <EditText
-        android:id="@+id/verify_code"
+        android:id="@+id/input_code_resetpwd"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:ems="10"
         android:hint="@string/verifycode_hint"
         android:inputType="number"
         android:textSize="18sp"
-        app:layout_constraintBottom_toTopOf="@+id/guideline13"
+        app:layout_constraintBottom_toTopOf="@+id/guideline03"
         app:layout_constraintEnd_toStartOf="@+id/guideline18"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintHorizontal_weight="1"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/guideline12"
+        app:layout_constraintTop_toTopOf="@+id/guideline02"
         app:layout_constraintVertical_bias="0.555" />
 
     <EditText
-        android:id="@+id/editText5"
+        android:id="@+id/input_password_resetpwd"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:ems="10"
-        android:hint="@string/setpwd_hint"
+        android:hint="@string/setnewpwd_hint"
         android:inputType="textPassword"
-        app:layout_constraintBottom_toTopOf="@+id/guideline11"
+        app:layout_constraintBottom_toTopOf="@+id/guideline04"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/guideline13" />
+        app:layout_constraintTop_toTopOf="@+id/guideline03" />
 
     <EditText
-        android:id="@+id/editText6"
+        android:id="@+id/input_fullname_resetpwd"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:ems="10"
-        android:hint="@string/confirmpwd_hint"
-        android:inputType="textPassword"
-        app:layout_constraintBottom_toTopOf="@+id/guideline15"
+        android:hint="@string/input_fullname_hint"
+        android:inputType="textPersonName"
+        app:layout_constraintBottom_toTopOf="@+id/guideline05"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/guideline11"
+        app:layout_constraintTop_toTopOf="@+id/guideline04"
         app:layout_constraintVertical_bias="0.75" />
 
     <Button
-        android:id="@+id/button2"
+        android:id="@+id/btn_resetpwd"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="@string/register_ok"
-        app:layout_constraintBottom_toTopOf="@+id/guideline16"
+        android:onClick="start_resetpwd"
+        android:text="@string/ok_resetpwd"
+        app:layout_constraintBottom_toTopOf="@+id/guideline07"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/guideline15" />
+        app:layout_constraintTop_toTopOf="@+id/guideline05" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline17"
@@ -120,17 +123,18 @@
         app:layout_constraintGuide_begin="-44dp" />
 
     <TextView
-        android:id="@+id/textView2"
+        android:id="@+id/tv_getcode_resetpwd"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:gravity="center"
         android:text="获取验证码"
+        android:textColor="#2196F3"
         android:textSize="18sp"
-        app:layout_constraintBottom_toTopOf="@+id/guideline13"
+        app:layout_constraintBottom_toTopOf="@+id/guideline03"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/guideline18"
-        app:layout_constraintTop_toTopOf="@+id/guideline12"
+        app:layout_constraintTop_toTopOf="@+id/guideline02"
         app:layout_constraintVertical_bias="0.396" />
 
     <androidx.constraintlayout.widget.Guideline

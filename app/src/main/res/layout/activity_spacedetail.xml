@@ -1,0 +1,317 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingLeft="10dp"
+    android:paddingRight="10dp"
+    android:paddingBottom="10dp"
+    tools:context=".home.activity.SpaceDetail">
+
+
+    <LinearLayout
+        android:id="@+id/linearLayout"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:divider="@drawable/divider"
+        android:orientation="vertical"
+        android:showDividers="middle"
+        app:layout_constraintBottom_toBottomOf="@id/guideline37"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/guideline35">
+
+        <LinearLayout
+            android:id="@+id/area_detail"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:divider="@drawable/divider"
+            android:orientation="horizontal"
+            android:padding="5dp"
+            android:showDividers="end|beginning">
+
+            <TextView
+                android:id="@+id/area_msg_detail"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="所属区域："
+                android:textColor="@color/pickerview_topbar_title"
+                android:textSize="15sp" />
+
+            <TextView
+                android:id="@+id/tv_area_detail"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="2"
+
+                android:text="安徽省马鞍山市雨山区" />
+            <!--            "安徽省马鞍山市雨山区""黑龙江省齐齐哈尔市梅里斯达翰尔族区"-->
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/positiondetail_detail"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:padding="5dp">
+
+            <TextView
+                android:id="@+id/positiondetail_msg_detail"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="详细地址："
+                android:textColor="@color/pickerview_topbar_title"
+                android:textSize="15sp" />
+
+            <TextView
+                android:id="@+id/tv_positiondetail_detail"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="2"
+                android:text="安徽工业大学东校区南侧" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/gothere_detail"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right"
+            android:orientation="horizontal"
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp">
+
+            <Button
+                android:id="@+id/button3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="end"
+                android:drawableLeft="@drawable/ic_gothere1"
+                android:drawablePadding="10dp"
+                android:gravity="left|center_vertical"
+                android:text="导航去这个位置" />
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:id="@+id/starttime_detail"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:padding="5dp">
+
+            <TextView
+                android:id="@+id/starttime_detail_msg_detail"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="起租时间："
+                android:textSize="15sp"
+                android:textColor="@color/pickerview_topbar_title" />
+
+            <TextView
+                android:id="@+id/tv_starttime_detail"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="2"
+                android:text="TextView" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/endtime_detail"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:padding="5dp">
+
+            <TextView
+                android:id="@+id/endtime_detail_msg_detail"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="截止时间："
+                android:textSize="15sp"
+                android:textColor="@color/pickerview_topbar_title" />
+
+            <TextView
+                android:id="@+id/tv_endtime_detail"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="2"
+                android:text="TextView" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/price_detail"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:padding="5dp">
+
+            <TextView
+                android:id="@+id/price_msg_detail"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="价      格："
+                android:textSize="15sp"
+                android:textColor="@color/pickerview_topbar_title" />
+
+            <TextView
+                android:id="@+id/tv_price_detail"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="2"
+                android:text="TextView" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/ownermobile_detail"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:padding="5dp">
+
+            <TextView
+                android:id="@+id/ownermobile_msg_detail"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="业主手机号："
+                android:textSize="15sp"
+                android:textColor="@color/pickerview_topbar_title" />
+
+            <TextView
+                android:id="@+id/tv_ownermobile_detail"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="2"
+                android:text="17355216002" />
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:id="@+id/remark_detail"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:padding="5dp">
+
+            <TextView
+                android:id="@+id/remark_msg_detail"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="备注信息："
+                android:layout_weight="1"
+                android:textSize="15sp"
+                android:textColor="@color/pickerview_topbar_title" />
+
+            <TextView
+                android:id="@+id/tv_remark_detail"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="2"
+                android:text="我是备注信息" />
+            <!--            ，但是我需要特别长特别长，万一有人就是这么长的备注呢-->
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/image_detail"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:showDividers="none"
+            android:padding="5dp">
+
+            <TextView
+                android:id="@+id/image_msg_detail"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="车位照片："
+                android:textSize="15sp"
+                android:textColor="@color/pickerview_topbar_title" />
+        </LinearLayout>
+
+
+        <ImageView
+            android:id="@+id/iv_image_detail"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:paddingTop="10dp"
+            android:paddingLeft="20dp"
+            android:paddingRight="20dp"
+
+            app:srcCompat="@drawable/test1" />
+
+
+    </LinearLayout>
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline35"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.03" />
+
+    <LinearLayout
+        android:id="@+id/linearLayout2"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/guideline36">
+
+        <!--        <TextView-->
+        <!--            android:id="@+id/textView"-->
+        <!--            android:layout_width="wrap_content"-->
+        <!--            android:layout_height="wrap_content"-->
+        <!--            android:layout_gravity="left"-->
+        <!--            android:layout_weight="1"-->
+        <!--            android:drawableTop="@drawable/ic_message_black_24dp"-->
+        <!--            android:gravity="center"-->
+        <!--            android:text="联系业主"-->
+        <!--            android:textColor="@color/pickerview_topbar_title"-->
+        <!--            android:textSize="12sp" />-->
+
+        <Button
+            android:id="@+id/button4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:drawablePadding="5dp"
+            android:drawableLeft="@drawable/ic_message_black_24dp"
+            android:text="联系业主" />
+
+        <Button
+            android:id="@+id/button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:drawablePadding="10dp"
+            android:gravity="left|center_vertical"
+            android:paddingLeft="35dp"
+
+            android:drawableLeft="@drawable/ic_rmb"
+            android:text="立即租赁此车位" />
+
+    </LinearLayout>
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline36"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.9" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline37"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.88" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

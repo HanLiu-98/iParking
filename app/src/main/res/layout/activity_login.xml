@@ -4,8 +4,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:paddingLeft="10dp"
+    android:paddingRight="10dp"
     android:clickable="true"
-    tools:context=".activity.LoginActivty"
+    tools:context=".app.LoginActivty"
     android:focusable="true">
 
     <androidx.constraintlayout.widget.Guideline
@@ -143,27 +145,27 @@
         app:layout_constraintGuide_percent="0.79" />
 
     <TextView
-        android:id="@+id/forget_pwd"
+        android:id="@+id/view_forget_pwd"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:clickable="true"
-        android:onClick="start_resetpwd"
+        android:focusable="true"
+        android:onClick="clickview_resetpwd"
         android:text="@string/forgetpwd_msg"
         android:textSize="20sp"
         app:layout_constraintBottom_toTopOf="@+id/guideline10"
-        app:layout_constraintEnd_toStartOf="@+id/register"
+        app:layout_constraintEnd_toStartOf="@+id/view_register"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/guideline9"
-        android:focusable="true" />
+        app:layout_constraintTop_toTopOf="@+id/guideline9" />
 
     <TextView
-        android:id="@+id/register"
+        android:id="@+id/view_register"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
-        android:onClick="start_register"
+        android:onClick="clickview_register"
         android:text="@string/register_msg"
         android:textSize="20sp"
         app:layout_constraintBottom_toTopOf="@+id/guideline10"
