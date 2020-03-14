@@ -40,6 +40,7 @@ import xyz.hanliu.iparking.configuration.Config;
 import xyz.hanliu.iparking.data.GlobalData;
 import xyz.hanliu.iparking.home.activity.SpaceDetail;
 import xyz.hanliu.iparking.release.activity.SelectPicActivity;
+import xyz.hanliu.iparking.utils.AlertDialogUtil;
 import xyz.hanliu.iparking.utils.DateUtil;
 import xyz.hanliu.iparking.utils.JsonBean;
 import xyz.hanliu.iparking.utils.ToastUtil;
@@ -49,51 +50,25 @@ import xyz.hanliu.iparking.utils.ToastUtil;
  */
 public class ReleaseFragment extends BaseFragment {
 
-//    private Context mContext=getContext();
-
     /*发布车位界面内的所有控件*/
     private Button btn_position_add;
     private Button btn_starttime_add;
     private Button btn_endtime_add;
     private ImageView iv_addpic_add;
     private Button btn_startRelease;
-
     private EditText et_positiondetail;
     private EditText et_price;
     private EditText et_remark;
 
-    /*和待发布车位相关的信息*/
-
-//    ParkingSpace space;
-
     String area = null;
     Date starttime = null;
     Date endtime = null;
-
-    ParkingSpace space;
-
-
     private Uri imageUri = null;
     private String imagePath = null;
 
 
     public static final int TO_SELECT_PHOTO = 3;
 
-//    @Nullable
-//    @Override
-//    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
-//                             @Nullable Bundle savedInstanceState) {
-//        View view = View.inflate(mContext,R.layout.fragment_release,null);
-//        btn_position_add=view.findViewById(R.id.btn_chooseposition_add);
-//        btn_starttime_add=view.findViewById(R.id.btn_choosestarttime_add);
-//        btn_endtime_add=view.findViewById(R.id.btn_chooseendtime_add);
-//        iv_addpic_add=view.findViewById(R.id.iv_addpic_add);
-//        btn_startRelease=view.findViewById(R.id.btn_startrelease_add);
-//        et_positiondetail=view.findViewById(R.id.et_positiondetail_add);
-//        et_price=view.findViewById(R.id.et_price_add);
-//        et_remark=view.findViewById(R.id.et_remark_add);
-//        return view;
-//    }
 
     @Override
     public View initView() {
@@ -108,23 +83,7 @@ public class ReleaseFragment extends BaseFragment {
         et_price = view.findViewById(R.id.et_price_add);
         et_remark = view.findViewById(R.id.et_remark_add);
         return view;
-//        return null;
     }
-
-
-//    public View initView()
-//    {
-//        View view = View.inflate(mContext,R.layout.fragment_release,null);
-//        btn_position_add=view.findViewById(R.id.btn_chooseposition_add);
-//        btn_starttime_add=view.findViewById(R.id.btn_choosestarttime_add);
-//        btn_endtime_add=view.findViewById(R.id.btn_chooseendtime_add);
-//        iv_addpic_add=view.findViewById(R.id.iv_addpic_add);
-//        btn_startRelease=view.findViewById(R.id.btn_startrelease_add);
-//        et_positiondetail=view.findViewById(R.id.et_positiondetail_add);
-//        et_price=view.findViewById(R.id.et_price_add);
-//        et_remark=view.findViewById(R.id.et_remark_add);
-//        return view;
-//    }
 
 
     @Override
@@ -142,19 +101,22 @@ public class ReleaseFragment extends BaseFragment {
         btn_position_add.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                showPickerView(GlobalData.options1Items, GlobalData.options2Items, GlobalData.options3Items);
+                showPickerView(GlobalData.options1Items, GlobalData.options2Items,
+                        GlobalData.options3Items);
             }
         });
+
         /* “选择起租时间” 按钮的点击事件绑定*/
         btn_starttime_add.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                TimePickerView pvTime = new TimePickerBuilder(mContext, new OnTimeSelectListener() {
+                TimePickerView pvTime = new TimePickerBuilder(mContext,
+                        new OnTimeSelectListener() {
                     @Override
                     public void onTimeSelect(Date date, View v) {//选中事件回调
                         btn_starttime_add.setText(DateUtil.dateToStr(date));
                         starttime = date;
-                    }
+                    }/*设置时间的格式*/
                 }).setType(new boolean[]{true, true, true, true, true, false}).build();
                 pvTime.show();
             }
@@ -163,12 +125,13 @@ public class ReleaseFragment extends BaseFragment {
         btn_endtime_add.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                TimePickerView pvTime = new TimePickerBuilder(mContext, new OnTimeSelectListener() {
+                TimePickerView pvTime = new TimePickerBuilder(mContext,
+                        new OnTimeSelectListener() {
                     @Override
                     public void onTimeSelect(Date date, View v) {//选中事件回调
                         btn_endtime_add.setText(DateUtil.dateToStr(date));
                         endtime = date;
-                    }
+                    }/*设置时间的格式*/
                 }).setType(new boolean[]{true, true, true, true, true, false}).build();
                 pvTime.show();
             }
@@ -186,23 +149,20 @@ public class ReleaseFragment extends BaseFragment {
 
         /* “确认发布” 的点击事件绑定*/
         btn_startRelease.setOnClickListener(new View.OnClickListener() {
-
             @Override
             public void onClick(View v) {
-//                ToastUtil.showMsg(mContext,"okkk!");
                 if (!isValid()) {
                     return;
                 }
-
-
+                /*输入合法后创建对象*/
                 String positionDetail = et_positiondetail.getText().toString().trim();
                 float price = Float.valueOf(et_price.getText().toString().trim());
                 String remark = et_remark.getText().toString().trim();
-
-
+                /**
+                 * 一定要先new，再set，否则会崩溃
+                 * 想要使用fastjson转对象，不能搞有参构造！！！
+                 */
                 ParkingSpace space = new ParkingSpace();
-
-
                 space.setRemark(remark);
                 space.setArea(area);
                 space.setPositionDetail(positionDetail);
@@ -213,48 +173,15 @@ public class ReleaseFragment extends BaseFragment {
                 space.setStatus(0);
                 space.setOwnerMobile(GlobalData.user.getMobile());
 
-                ToastUtil.showMsg(mContext, space.toString());
-                System.out.println(space.toString());
-
-
-//                space=new ParkingSpace();
                 releaseSpace(space);
-
-
-//                File file=new File(imagePath);
-//                List<File> files = new ArrayList<>();
-//                files.add(file);
-//
-//                HttpParams param = new HttpParams();
-//                param.put("number", "123");
-//                String url = Config.URL_UPLOAD;
-//                PostRequest<String> post = OkGo.<String>post(url);
-//                post.tag(this);
-//                post.isMultipart(true);
-//                post.params(param);
-//                post.addFileParams("files", files);
-//                post.execute(new StringCallback() {
-//                    @Override
-//                    public void onSuccess(Response<String> response) {
-//
-//
-//                    }
-//
-//                    @Override   //网络请求成功的回调函数
-//                    public void onError(Response<String> response) {
-//                        super.onError(response);
-//                        String message = response.getException().getMessage();
-//                        //利用Toast显示错误信息
-//                        Toast.makeText(mContext, "" + message, Toast.LENGTH_SHORT).show();
-//                    }
-//                });
-
-
             }
         });
     }
 
 
+    /**
+     * 向服务器上传车位信息
+     */
     private void releaseSpace(ParkingSpace space) {
         btn_startRelease.setEnabled(false);
         final ProgressDialog progressDialog = new ProgressDialog(mContext);
@@ -285,39 +212,32 @@ public class ReleaseFragment extends BaseFragment {
                 .params(params)
                 .build()
                 .execute(new StringCallback() {
-
                     @Override
                     public void onError(Call call, Exception e, int id) {
-
                         String message = e.getMessage();
-                        //利用Toast显示错误信息
-                        ToastUtil.showMsg(mContext, message);
+                        progressDialog.dismiss();
+                        btn_startRelease.setEnabled(true);
+                        AlertDialogUtil.showNetErrorAlertDialog(mContext, message);
+
                     }
 
                     @Override
                     public void onResponse(String response, int id) {
-                        //获取服务器响应的字符串
-//                        String str = response;
-//                        progressDialog.dismiss();
-//                            onReleaseSuccess();
-//                        ToastUtil.showMsg(mContext,str);
 
                         String[] strs = response.split("###");
-
-                        if (strs[0].equals("success")) {
-                            //注册成功
+                        if (strs[0].equals("success"))/*服务器会返回主键*/ {
                             progressDialog.dismiss();
                             onReleaseSuccess(strs[1]);
-//                            ToastUtil.showMsg(mContext,strs[1]);
                         } else {
 
                         }
-
-
                     }
                 });
     }
 
+    /**
+     * 判断数据输入是否合法
+     */
     public boolean isValid() {
         boolean valid = true;
         String area = btn_position_add.getText().toString();
@@ -340,30 +260,25 @@ public class ReleaseFragment extends BaseFragment {
             et_price.setError(null);
         }
 
-        if (area.equals("选择位置") || starttime == null || endtime == null || imageUri == null ||
-                !(starttime.getTime() > System.currentTimeMillis() && starttime.getTime() < endtime.getTime())) {
-            String msg = "确认发布前请确保：\n1.所有信息项填写完整；\n2.起租时间是一个未来时间;\n" +
+        if (area.equals("选择位置") || starttime == null
+                || endtime == null || imageUri == null
+                || !(starttime.getTime() > System.currentTimeMillis()
+                && starttime.getTime() < endtime.getTime())) {
+            String msg = "确认发布前请确保：\n1.所有信息项填写完整；\n" +
+                    "2.起租时间是一个未来时间;\n" +
                     "3.起租时间早于截止时间；\n4.选择一张车位照片；";
-            AlertDialog.Builder builder = new AlertDialog.Builder(mContext).
-                    setTitle("输入数据不合法").
-                    setIcon(R.drawable.ic_icon_waring).
-                    setMessage(msg);
-            builder.setPositiveButton("我知道了", new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialog, int which) {
-                    dialog.cancel();
-                }
-            });
-            builder.show();
+
+            AlertDialogUtil.showDataInvaidAlertDialog(mContext, msg);
             valid = false;
         }
-
-
         return valid;
 
     }
 
 
+    /**
+     * 发布成功
+     */
     public void onReleaseSuccess(String spacekey) {
         AlertDialog.Builder builder = new AlertDialog.Builder(mContext).
                 setTitle("提示").
@@ -373,19 +288,11 @@ public class ReleaseFragment extends BaseFragment {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 Intent intent = new Intent(getActivity(), SpaceDetail.class);
+                /*给空闲车位详情Activity添加主键数据，即id*/
                 Bundle bundle = new Bundle();
-
                 bundle.putInt("pk", Integer.valueOf(spacekey));
                 intent.putExtras(bundle);
-                //在ActivityA中启动activityB,在返回的时候携带来自B的数据
                 startActivity(intent);
-//                ToastUtil.showMsg(mContext,"aha!");
-
-//                Bundle bundle = new Bundle();
-//
-//                bundle.putInt("pk",123);
-//                intent.putExtras(bundle);
-//                mContext.startActivity(intent);
 
             }
         });
@@ -407,11 +314,17 @@ public class ReleaseFragment extends BaseFragment {
         imagePath = null;
     }
 
+    /**
+     * 发布失败的情况
+     */
     public void onReleaseFailed(String failmsg) {
         ToastUtil.showMsg(mContext, failmsg);
         btn_startRelease.setEnabled(true);
     }
 
+    /***
+     * 启动选择照片的回调
+     */
     @Override
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         if (resultCode == Activity.RESULT_OK && requestCode == TO_SELECT_PHOTO) {

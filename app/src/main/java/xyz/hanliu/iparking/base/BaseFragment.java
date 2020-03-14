@@ -23,9 +23,8 @@ public abstract class BaseFragment extends Fragment {
 
     @Nullable
     @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-
-
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
+                             @Nullable Bundle savedInstanceState) {
         View view = initView();
         return view;
     }
@@ -40,6 +39,5 @@ public abstract class BaseFragment extends Fragment {
 
     // 当子类需要加载耗时间的数据的时候, 可以重写该方法
     public void initData() {
-
     }
 }

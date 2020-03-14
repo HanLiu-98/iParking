@@ -7,7 +7,7 @@
     tools:context=".home.fragment.HomeFragment">
 
     <Button
-        android:id="@+id/btn_chooseposition"
+        android:id="@+id/btn_chooseposition_home"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="4dp"
@@ -24,16 +24,16 @@
         app:layout_constraintTop_toTopOf="@+id/guideline11" />
 
     <Button
-        android:id="@+id/button2"
+        android:id="@+id/btn_search_home"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@drawable/bg_chooseposition_btn"
         android:text="立即搜索"
-        app:layout_constraintBottom_toBottomOf="@+id/btn_chooseposition"
+        app:layout_constraintBottom_toBottomOf="@+id/btn_chooseposition_home"
         app:layout_constraintHorizontal_bias="0.12"
         app:layout_constraintLeft_toLeftOf="@id/guideline14"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/btn_chooseposition"
+        app:layout_constraintTop_toTopOf="@+id/btn_chooseposition_home"
         app:layout_constraintVertical_bias="1.0" />
 
     <androidx.constraintlayout.widget.Guideline
@@ -63,7 +63,7 @@
         app:layout_constraintGuide_percent="0.72" />
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rv_spacelist"
+        android:id="@+id/rv_spacelist_home"
         android:layout_width="0dp"
         android:layout_height="0dp"
         app:layout_constraintBottom_toBottomOf="parent"

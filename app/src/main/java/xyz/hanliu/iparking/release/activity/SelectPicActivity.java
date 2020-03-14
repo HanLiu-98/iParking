@@ -78,13 +78,15 @@ public class SelectPicActivity extends AppCompatActivity {
                         mTvPath.setText(outputFile.getAbsolutePath());
                         mTvUri.setText(outputUri.toString());
                         /*根据图片的URI将图片加载进入ImageView*/
-                        Glide.with(SelectPicActivity.this).load(outputUri).into(mIvPic);
+                        Glide.with(SelectPicActivity.this)
+                                .load(outputUri).into(mIvPic);
                     }
                 }, true);/*true裁剪，false不裁剪*/
 
         /*检查权限*/
         checkPermission();
     }
+
 
     /*
      * 检查用户权限，如果没有就申请
@@ -104,6 +106,7 @@ public class SelectPicActivity extends AppCompatActivity {
             ToastUtil.showMsg(SelectPicActivity.this, "已经获得了所有权限");
         }
     }
+
 
     /***
      *申请权限完成的回调函数

@@ -7,7 +7,6 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -21,6 +20,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import xyz.hanliu.iparking.R;
 import xyz.hanliu.iparking.configuration.Config;
+import xyz.hanliu.iparking.utils.AlertDialogUtil;
 
 public class ResetpwdActivity extends AppCompatActivity {
 
@@ -52,7 +52,7 @@ public class ResetpwdActivity extends AppCompatActivity {
             onResetpwdFail("信息填完整才能进行密码重置操作！");
             return;
         }
-        //输入合法，将注册按钮置为不可用，显示环形进度对话框
+        //输入合法，将密码重置按钮置为不可用，显示环形进度对话框
         btnResetpwd.setEnabled(false);
         final ProgressDialog progressDialog = new ProgressDialog(ResetpwdActivity.this);
         //进度条采用不明确显示进度的模糊模式
@@ -68,7 +68,6 @@ public class ResetpwdActivity extends AppCompatActivity {
         map.put("mobile", mobile);
         map.put("password", password);
         map.put("fullname", fullname);
-//        map.put("nickname",null);
 
         //进行网络请求
         OkGo.<String>post(Config.URL_RESETPWD)
@@ -79,12 +78,12 @@ public class ResetpwdActivity extends AppCompatActivity {
                         //获取服务器响应的字符串
                         String str = response.body();
                         if (str.equals("success")) {
-                            //注册成功
+                            //密码重置成功
                             progressDialog.dismiss();
                             onResetpwdSuccess();
                         } else {
                             progressDialog.dismiss();
-                            onResetpwdFail("该手机号码已经注册过了！");
+                            onResetpwdFail("输入的信息有误不能进行重置操作！");
                         }
                     }
 
@@ -92,8 +91,7 @@ public class ResetpwdActivity extends AppCompatActivity {
                     public void onError(Response<String> response) {
                         super.onError(response);
                         String message = response.getException().getMessage();
-                        //利用Toast显示错误信息
-                        Toast.makeText(ResetpwdActivity.this, "" + message, Toast.LENGTH_SHORT).show();
+                        AlertDialogUtil.showNetErrorAlertDialog(ResetpwdActivity.this, message);
                     }
                 });
 
@@ -140,12 +138,12 @@ public class ResetpwdActivity extends AppCompatActivity {
      * 注册失败
      */
     public void onResetpwdFail(String failmsg) {
-        Toast.makeText(ResetpwdActivity.this, failmsg, Toast.LENGTH_LONG).show();
+        AlertDialogUtil.showFailAlertDialog(ResetpwdActivity.this, failmsg);
         btnResetpwd.setEnabled(true);
     }
 
     /**
-     * 注册成功
+     * 密码重置成功
      */
     public void onResetpwdSuccess() {
         AlertDialog.Builder builder = new AlertDialog.Builder(this).
@@ -159,5 +157,12 @@ public class ResetpwdActivity extends AppCompatActivity {
             }
         });
         builder.show();
+
+        /*把输入框清空*/
+        inputMobile.setText("");
+        inputCode.setText("");
+        inputFullname.setText("");
+        inputPassword.setText("");
+        btnResetpwd.setEnabled(true);
     }
 }

@@ -24,6 +24,7 @@ import xyz.hanliu.iparking.R;
 import xyz.hanliu.iparking.data.GlobalData;
 import xyz.hanliu.iparking.utils.GetJsonDataUtil;
 import xyz.hanliu.iparking.utils.JsonBean;
+import xyz.hanliu.iparking.utils.ToastUtil;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -141,6 +142,10 @@ public class MainActivity extends AppCompatActivity {
         AppBarConfiguration configuration = new AppBarConfiguration.Builder(bottomNavigationView.getMenu()).build();
         NavigationUI.setupActionBarWithNavController(this, navController, configuration);
         NavigationUI.setupWithNavController(bottomNavigationView, navController);
+
+        ToastUtil.showMsg(MainActivity.this, "欢迎你，" + GlobalData.user.getNickname()
+                + "~");
+//        "默认为你加载的是北京市东城区的空闲车位信息。有需要请自行搜索~\n"
 
     }
 }

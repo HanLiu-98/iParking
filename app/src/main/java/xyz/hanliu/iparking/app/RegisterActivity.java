@@ -7,7 +7,6 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -21,6 +20,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import xyz.hanliu.iparking.R;
 import xyz.hanliu.iparking.configuration.Config;
+import xyz.hanliu.iparking.utils.AlertDialogUtil;
 
 public class RegisterActivity extends AppCompatActivity {
 
@@ -96,8 +96,8 @@ public class RegisterActivity extends AppCompatActivity {
                     public void onError(Response<String> response) {
                         super.onError(response);
                         String message = response.getException().getMessage();
-                        //利用Toast显示错误信息
-                        Toast.makeText(RegisterActivity.this, "" + message, Toast.LENGTH_SHORT).show();
+                        AlertDialogUtil.showNetErrorAlertDialog(RegisterActivity.this, message);
+                        btnRegister.setEnabled(true);
                     }
                 });
 
@@ -152,7 +152,7 @@ public class RegisterActivity extends AppCompatActivity {
      * 注册失败
      */
     public void onRegisterFailed(String failmsg) {
-        Toast.makeText(RegisterActivity.this, failmsg, Toast.LENGTH_LONG).show();
+        AlertDialogUtil.showFailAlertDialog(RegisterActivity.this, failmsg);
         btnRegister.setEnabled(true);
     }
 
@@ -171,5 +171,13 @@ public class RegisterActivity extends AppCompatActivity {
             }
         });
         builder.show();
+        /*把输入框清空*/
+        inputMobile.setText("");
+        inputCode.setText("");
+        inputFullname.setText("");
+        inputNickname.setText("");
+        inputPassword.setText("");
+        btnRegister.setEnabled(true);
+
     }
 }

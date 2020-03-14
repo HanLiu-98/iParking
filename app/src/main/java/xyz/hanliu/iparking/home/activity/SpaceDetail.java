@@ -3,7 +3,6 @@ package xyz.hanliu.iparking.home.activity;
 import android.os.Bundle;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -20,8 +19,8 @@ import butterknife.ButterKnife;
 import xyz.hanliu.iparking.R;
 import xyz.hanliu.iparking.app.bean.ParkingSpace;
 import xyz.hanliu.iparking.configuration.Config;
+import xyz.hanliu.iparking.utils.AlertDialogUtil;
 import xyz.hanliu.iparking.utils.DateUtil;
-import xyz.hanliu.iparking.utils.ToastUtil;
 
 public class SpaceDetail extends AppCompatActivity {
 
@@ -52,11 +51,12 @@ public class SpaceDetail extends AppCompatActivity {
         int pk = getIntent().getExtras().getInt("pk", -1);
         /*根据主键内容，请求网络，并且填充视图*/
         requestSpaceDetailAndFillData(pk);
-
-//       ToastUtil.showMsg(SpaceDetail.this,"图片加载耗时，请耐心等待...");
-
     }
 
+
+    /**
+     * 根据主键内容，请求网络，并且填充视图
+     */
     private void requestSpaceDetailAndFillData(int pk) {
         HashMap<String, String> map = new HashMap<>();
         map.put("id", String.valueOf(pk));
@@ -68,35 +68,34 @@ public class SpaceDetail extends AppCompatActivity {
                         //获取服务器响应的JSON字符串
                         String json = response.body();
                         //利用fastjson库,将字符串转换成SpaceInfo_Detail对象
-                        ParkingSpace parkingSpace_detail = JSON.parseObject(json, ParkingSpace.class);
+                        ParkingSpace parkingSpace_detail = JSON.parseObject
+                                (json, ParkingSpace.class);
                         fillData(parkingSpace_detail);
-
                     }
 
-                    @Override   //网络请求成功的回调函数
+                    @Override   //网络请求失败的回调函数
                     public void onError(Response<String> response) {
                         super.onError(response);
                         String message = response.getException().getMessage();
-                        //利用Toast显示错误信息
-                        Toast.makeText(getApplicationContext(), "" + message, Toast.LENGTH_SHORT).show();
+                        AlertDialogUtil.showNetErrorAlertDialog(SpaceDetail.this, message);
                     }
                 });
     }
 
 
+    /**
+     * 用停车位对象填充视图数据
+     */
     private void fillData(ParkingSpace space) {
         tv_area.setText(space.getArea());
         tv_positionDetail.setText(space.getPositionDetail());
         tv_starttime.setText(DateUtil.dateToStr(space.getStartTime()));
         tv_endtime.setText(DateUtil.dateToStr(space.getEndTime()));
-//        String pricestr="￥"+String.valueOf(space.getPrice());
         tv_price.setText("￥" + String.valueOf(space.getPrice()));
         tv_ownermobile.setText(space.getOwnerMobile());
         tv_remark.setText(space.getRemark());
-        ToastUtil.showMsg(SpaceDetail.this, "图片加载耗时，请耐心等待...");
+        /*利用Glide进行图片的加载*/
         Glide.with(SpaceDetail.this)
                 .load(Config.IMAGE_HOST + space.getImagePath()).into(iv_image);
-
-
     }
 }

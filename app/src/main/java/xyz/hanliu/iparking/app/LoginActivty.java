@@ -9,7 +9,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
-import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -23,9 +22,10 @@ import java.util.HashMap;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import xyz.hanliu.iparking.R;
+import xyz.hanliu.iparking.app.bean.User;
 import xyz.hanliu.iparking.configuration.Config;
 import xyz.hanliu.iparking.data.GlobalData;
-import xyz.hanliu.iparking.app.bean.User;
+import xyz.hanliu.iparking.utils.AlertDialogUtil;
 
 public class LoginActivty extends AppCompatActivity {
 
@@ -135,7 +135,6 @@ public class LoginActivty extends AppCompatActivity {
                             editor.apply();
                             //跳转到APP主页面
                             onLoginSuccess(user);
-                            Toast.makeText(LoginActivty.this, "欢迎你，" + user.getNickname() + "！", Toast.LENGTH_SHORT).show();
 
                         } else {
                             progressDialog.dismiss();
@@ -143,12 +142,16 @@ public class LoginActivty extends AppCompatActivity {
                         }
                     }
 
-                    @Override   //网络请求成功的回调函数
+                    @Override   //网络请求失败的回调函数
                     public void onError(Response<String> response) {
                         super.onError(response);
                         String message = response.getException().getMessage();
-                        //利用Toast显示错误信息
-                        Toast.makeText(LoginActivty.this, "" + message, Toast.LENGTH_SHORT).show();
+                        //利用AlertDialog显示错误信息
+                        progressDialog.dismiss();
+                        btnLogin.setEnabled(true);
+                        AlertDialogUtil.showNetErrorAlertDialog(LoginActivty.this, message);
+
+
                     }
                 });
     }
@@ -191,7 +194,8 @@ public class LoginActivty extends AppCompatActivity {
      * 登录失败
      */
     public void onLoginFailed(String failmsg) {
-        Toast.makeText(LoginActivty.this, failmsg, Toast.LENGTH_LONG).show();
+        AlertDialogUtil.showFailAlertDialog(LoginActivty.this, failmsg);
         btnLogin.setEnabled(true);
+
     }
 }
