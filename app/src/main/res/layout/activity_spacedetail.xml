@@ -7,7 +7,7 @@
     android:paddingLeft="10dp"
     android:paddingRight="10dp"
     android:paddingBottom="10dp"
-    tools:context=".home.activity.SpaceDetail">
+    tools:context=".home.activity.SpaceDetailActivity">
 
 
     <LinearLayout
@@ -46,7 +46,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="2"
 
-                android:text="安徽省马鞍山市雨山区" />
+                android:text=" " />
             <!--            "安徽省马鞍山市雨山区""黑龙江省齐齐哈尔市梅里斯达翰尔族区"-->
         </LinearLayout>
 
@@ -71,7 +71,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="2"
-                android:text="安徽工业大学东校区南侧" />
+                android:text=" " />
         </LinearLayout>
 
         <LinearLayout
@@ -116,7 +116,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="2"
-                android:text="TextView" />
+                android:text=" " />
         </LinearLayout>
 
         <LinearLayout
@@ -140,7 +140,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="2"
-                android:text="TextView" />
+                android:text=" " />
         </LinearLayout>
 
         <LinearLayout
@@ -164,7 +164,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="2"
-                android:text="TextView" />
+                android:text=" " />
         </LinearLayout>
 
         <LinearLayout
@@ -188,7 +188,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="2"
-                android:text="17355216002" />
+                android:text=" " />
         </LinearLayout>
 
 
@@ -213,7 +213,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="2"
-                android:text="我是备注信息" />
+                android:text=" " />
             <!--            ，但是我需要特别长特别长，万一有人就是这么长的备注呢-->
         </LinearLayout>
 
@@ -239,11 +239,11 @@
             android:id="@+id/iv_image_detail"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:paddingTop="10dp"
             android:paddingLeft="20dp"
+            android:paddingTop="10dp"
             android:paddingRight="20dp"
 
-            app:srcCompat="@drawable/test1" />
+            app:srcCompat="@drawable/ic_blankpicture" />
 
 
     </LinearLayout>
@@ -278,7 +278,7 @@
         <!--            android:textSize="12sp" />-->
 
         <Button
-            android:id="@+id/button4"
+            android:id="@+id/btn_contact_detail"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:drawablePadding="5dp"
@@ -286,7 +286,7 @@
             android:text="联系业主" />
 
         <Button
-            android:id="@+id/button"
+            android:id="@+id/btn_rent_detail"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"

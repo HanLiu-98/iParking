@@ -26,6 +26,7 @@ import xyz.hanliu.iparking.app.bean.User;
 import xyz.hanliu.iparking.configuration.Config;
 import xyz.hanliu.iparking.data.GlobalData;
 import xyz.hanliu.iparking.utils.AlertDialogUtil;
+import xyz.hanliu.iparking.utils.ToastUtil;
 
 public class LoginActivty extends AppCompatActivity {
 
@@ -49,7 +50,7 @@ public class LoginActivty extends AppCompatActivity {
         //绑定控件
         ButterKnife.bind(this);
         rememberPwd();
-
+//        Dialog bottomDialog = new Dialog(this, R.style.BottomDialog);
 
     }
 
@@ -185,6 +186,8 @@ public class LoginActivty extends AppCompatActivity {
         btnLogin.setEnabled(true);
         GlobalData.user = user;
         Intent intent = new Intent(LoginActivty.this, MainActivity.class);
+        ToastUtil.showMsg(LoginActivty.this, "欢迎你，" + GlobalData.user.getNickname()
+                + "~");
         intent.putExtra("USER", user);
         startActivity(intent);
         finish();

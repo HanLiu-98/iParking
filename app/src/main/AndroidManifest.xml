@@ -4,7 +4,7 @@
     package="xyz.hanliu.iparking">
 
     <uses-permission android:name="android.permission.INTERNET" />
-    <!--    android:icon="@mipmap/ic_launcher"-->
+
     <application
         android:allowBackup="true"
         android:icon="@drawable/iparkinglogo"
@@ -14,37 +14,65 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
+
+
+        <!--        充值界面-->
         <activity
-            android:name=".home.activity.SpaceDetail"
+            android:name=".user.activity.DepositActivity"
+            android:label="钱包充值"
+
+            ></activity>
+
+        <!--        android:parentActivityName=".home.activity.SpaceDetailActivity"-->
+
+
+        <!--        空闲车位详情-->
+        <activity
+            android:name=".home.activity.SpaceDetailActivity"
             android:label="空闲车位详情"
             android:parentActivityName=".app.MainActivity"></activity>
-        <activity android:name=".release.activity.SelectPicActivity" />
+
+
+        <!--        选择一张车位照片-->
+        <activity
+            android:name=".release.activity.SelectPicActivity"
+            android:label="选择一张车位照片" />
+
+
+        <!--        主页面-->
         <activity
             android:name=".app.MainActivity"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustPan|stateHidden">
-
             <!-- 解决软键盘弹出，界面整体上移 -->
         </activity>
+
+
+        <!--        登录界面-->
         <activity
             android:name=".app.LoginActivty"
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+
+        <!--        忘记密码-->
         <activity
             android:name=".app.ResetpwdActivity"
             android:label="@string/forgetpwd_msg_bar"
             android:parentActivityName=".app.LoginActivty"
             android:screenOrientation="portrait" />
+
+        <!--        注册     -->
         <activity
             android:name=".app.RegisterActivity"
             android:label="@string/register_msg_bar"
             android:parentActivityName=".app.LoginActivty"
             android:screenOrientation="portrait" />
     </application>
+
 
 </manifest>

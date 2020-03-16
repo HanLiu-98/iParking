@@ -1,6 +1,8 @@
 package xyz.hanliu.iparking.home.activity;
 
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -19,10 +21,13 @@ import butterknife.ButterKnife;
 import xyz.hanliu.iparking.R;
 import xyz.hanliu.iparking.app.bean.ParkingSpace;
 import xyz.hanliu.iparking.configuration.Config;
+import xyz.hanliu.iparking.data.GlobalData;
 import xyz.hanliu.iparking.utils.AlertDialogUtil;
 import xyz.hanliu.iparking.utils.DateUtil;
+import xyz.hanliu.iparking.utils.ToastUtil;
 
-public class SpaceDetail extends AppCompatActivity {
+public class SpaceDetailActivity extends AppCompatActivity {
+    int spaceid = 0;
 
     @BindView(R.id.tv_area_detail)
     TextView tv_area;
@@ -41,6 +46,11 @@ public class SpaceDetail extends AppCompatActivity {
     @BindView(R.id.iv_image_detail)
     ImageView iv_image;
 
+    @BindView(R.id.btn_contact_detail)
+    Button btn_contact;
+    @BindView(R.id.btn_rent_detail)
+    Button btn_rent;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -48,9 +58,9 @@ public class SpaceDetail extends AppCompatActivity {
         /*控件绑定*/
         ButterKnife.bind(this);
         /*将传递过来的主键信息取出来*/
-        int pk = getIntent().getExtras().getInt("pk", -1);
+        spaceid = getIntent().getExtras().getInt("pk", -1);
         /*根据主键内容，请求网络，并且填充视图*/
-        requestSpaceDetailAndFillData(pk);
+        requestSpaceDetailAndFillData(spaceid);
     }
 
 
@@ -67,17 +77,25 @@ public class SpaceDetail extends AppCompatActivity {
                     public void onSuccess(Response<String> response) {
                         //获取服务器响应的JSON字符串
                         String json = response.body();
-                        //利用fastjson库,将字符串转换成SpaceInfo_Detail对象
-                        ParkingSpace parkingSpace_detail = JSON.parseObject
+                        //利用fastjson库,将字符串转换成ParkingSpace对象
+                        ParkingSpace space = JSON.parseObject
                                 (json, ParkingSpace.class);
-                        fillData(parkingSpace_detail);
+
+                        /*初始化监听器*/
+                        /*如果这个车位属于自己*/
+                        if (space.getOwnerMobile().equals(GlobalData.user.getMobile())) {
+                            initOwnListeners();
+                        } else {
+                            initOtherListeners();
+                        }
+                        fillData(space);
                     }
 
                     @Override   //网络请求失败的回调函数
                     public void onError(Response<String> response) {
                         super.onError(response);
                         String message = response.getException().getMessage();
-                        AlertDialogUtil.showNetErrorAlertDialog(SpaceDetail.this, message);
+                        AlertDialogUtil.showNetErrorAlertDialog(SpaceDetailActivity.this, message);
                     }
                 });
     }
@@ -95,7 +113,44 @@ public class SpaceDetail extends AppCompatActivity {
         tv_ownermobile.setText(space.getOwnerMobile());
         tv_remark.setText(space.getRemark());
         /*利用Glide进行图片的加载*/
-        Glide.with(SpaceDetail.this)
+        Glide.with(SpaceDetailActivity.this)
                 .load(Config.IMAGE_HOST + space.getImagePath()).into(iv_image);
     }
+
+    /**
+     *
+     */
+    private void initOtherListeners() {
+        btn_rent.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+//                Intent intent = new Intent(SpaceDetailActivity.this, DepositActivity.class);
+//                Bundle bundle = new Bundle();
+//                bundle.putInt("pk", spaceid);
+//                intent.putExtras(bundle);
+//                startActivity(intent);
+            }
+        });
+
+    }
+
+    private void initOwnListeners() {
+        btn_rent.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ToastUtil.showMsg(SpaceDetailActivity.this, "不能出租自己的车位哦~");
+            }
+        });
+
+        btn_contact.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ToastUtil.showMsg(SpaceDetailActivity.this, "这个车位的主人是你自己哦~");
+            }
+        });
+
+
+    }
+
+
 }

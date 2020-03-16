@@ -38,7 +38,7 @@ import xyz.hanliu.iparking.app.bean.ParkingSpace;
 import xyz.hanliu.iparking.base.BaseFragment;
 import xyz.hanliu.iparking.configuration.Config;
 import xyz.hanliu.iparking.data.GlobalData;
-import xyz.hanliu.iparking.home.activity.SpaceDetail;
+import xyz.hanliu.iparking.home.activity.SpaceDetailActivity;
 import xyz.hanliu.iparking.release.activity.SelectPicActivity;
 import xyz.hanliu.iparking.utils.AlertDialogUtil;
 import xyz.hanliu.iparking.utils.DateUtil;
@@ -287,7 +287,7 @@ public class ReleaseFragment extends BaseFragment {
         builder.setPositiveButton("去看看我发布的车位", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                Intent intent = new Intent(getActivity(), SpaceDetail.class);
+                Intent intent = new Intent(getActivity(), SpaceDetailActivity.class);
                 /*给空闲车位详情Activity添加主键数据，即id*/
                 Bundle bundle = new Bundle();
                 bundle.putInt("pk", Integer.valueOf(spacekey));

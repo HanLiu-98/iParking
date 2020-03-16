@@ -28,7 +28,7 @@ import xyz.hanliu.iparking.app.bean.ParkingSpace_General;
 import xyz.hanliu.iparking.base.BaseFragment;
 import xyz.hanliu.iparking.configuration.Config;
 import xyz.hanliu.iparking.data.GlobalData;
-import xyz.hanliu.iparking.home.activity.SpaceDetail;
+import xyz.hanliu.iparking.home.activity.SpaceDetailActivity;
 import xyz.hanliu.iparking.home.adapter.SpaceRecyclerViewAdapter;
 import xyz.hanliu.iparking.utils.AlertDialogUtil;
 import xyz.hanliu.iparking.utils.JsonBean;
@@ -140,7 +140,7 @@ public class HomeFragment extends BaseFragment {
             adapter.setOnSpaceRecyclerView(new SpaceRecyclerViewAdapter.OnSpaceRecyclerView() {
                 @Override
                 public void OnItemClick(int position) {
-                    Intent intent = new Intent(mContext, SpaceDetail.class);
+                    Intent intent = new Intent(mContext, SpaceDetailActivity.class);
                     Bundle bundle = new Bundle();
                     bundle.putInt("pk", spaceList.get(position).getId());
                     intent.putExtras(bundle);
