@@ -24,7 +24,7 @@ import java.util.List;
 
 import okhttp3.Call;
 import xyz.hanliu.iparking.R;
-import xyz.hanliu.iparking.app.bean.ParkingSpace_General;
+import xyz.hanliu.iparking.home.bean.ParkingSpace_General;
 import xyz.hanliu.iparking.base.BaseFragment;
 import xyz.hanliu.iparking.configuration.Config;
 import xyz.hanliu.iparking.data.GlobalData;

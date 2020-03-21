@@ -111,7 +111,7 @@
                         android:textSize="16sp" />
 
                     <TextView
-                        android:id="@+id/textView13"
+                        android:id="@+id/tv_balance_user"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="1000.0"
@@ -129,7 +129,7 @@
                     android:text="充值" />
 
                 <Button
-                    android:id="@+id/button7"
+                    android:id="@+id/btn_withdrawal_user"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
@@ -141,7 +141,7 @@
 
 
         <Button
-            android:id="@+id/button9"
+            android:id="@+id/myrelease_user"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@color/pickerview_bg_topbar"
@@ -149,35 +149,49 @@
             android:drawableStart="@drawable/ic_release"
             android:drawablePadding="10dp"
             android:gravity="left|center_vertical"
-            android:paddingLeft="120dp"
+            android:paddingLeft="90dp"
             android:paddingRight="20dp"
-            android:text="我发布的" />
+            android:text="我发布的空闲车位" />
 
         <Button
-            android:id="@+id/button10"
+            android:id="@+id/btn_waitpayorder_user"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@color/pickerview_bg_topbar"
             android:drawableLeft="@drawable/ic_waitpay"
             android:drawablePadding="10dp"
             android:gravity="left|center_vertical"
-            android:paddingLeft="120dp"
+            android:paddingLeft="110dp"
             android:paddingRight="20dp"
             android:layout_marginTop="20dp"
             android:text="待支付订单" />
 
         <Button
-            android:id="@+id/button11"
+            android:id="@+id/btn_payedorder_user"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@color/pickerview_bg_topbar"
             android:drawablePadding="10dp"
             android:gravity="left|center_vertical"
-            android:paddingLeft="120dp"
+            android:paddingLeft="110dp"
             android:paddingRight="20dp"
             android:layout_marginTop="20dp"
-            android:drawableLeft="@drawable/ic_finished"
-            android:text="已完成订单" />
+            android:drawableLeft="@drawable/ic_payed"
+            android:text="已支付订单" />
+
+        <!--        <Button-->
+        <!--            android:id="@+id/btn_finishedorder_user"-->
+        <!--            android:layout_width="match_parent"-->
+        <!--            android:layout_height="wrap_content"-->
+        <!--            android:background="@color/pickerview_bg_topbar"-->
+        <!--            android:drawablePadding="10dp"-->
+        <!--            android:gravity="left|center_vertical"-->
+        <!--            android:paddingLeft="95dp"-->
+        <!--            android:paddingRight="20dp"-->
+        <!--            android:layout_marginTop="20dp"-->
+        <!--            android:drawableLeft="@drawable/ic_finished"-->
+        <!--            android:text="已完成订单"-->
+        <!--            />-->
 
 
     </LinearLayout>

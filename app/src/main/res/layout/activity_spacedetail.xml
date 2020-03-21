@@ -32,7 +32,7 @@
             android:showDividers="end|beginning">
 
             <TextView
-                android:id="@+id/area_msg_detail"
+                android:id="@+id/area_msg_item"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -84,7 +84,7 @@
             android:paddingBottom="10dp">
 
             <Button
-                android:id="@+id/button3"
+                android:id="@+id/btn_navigation_detail"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="end"

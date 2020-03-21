@@ -14,7 +14,7 @@ import com.bumptech.glide.Glide;
 import java.util.List;
 
 import xyz.hanliu.iparking.R;
-import xyz.hanliu.iparking.app.bean.ParkingSpace_General;
+import xyz.hanliu.iparking.home.bean.ParkingSpace_General;
 import xyz.hanliu.iparking.configuration.Config;
 import xyz.hanliu.iparking.utils.DateUtil;
 

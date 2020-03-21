@@ -332,7 +332,6 @@ public class ReleaseFragment extends BaseFragment {
             String uri = data.getExtras().getString("uri");
             imageUri = Uri.parse(uri);
             imagePath = data.getExtras().getString("path");
-            ToastUtil.showMsg(getContext(), "onActivityResult" + imageUri);
             iv_addpic_add.setImageURI(imageUri);
         }
         super.onActivityResult(requestCode, resultCode, data);

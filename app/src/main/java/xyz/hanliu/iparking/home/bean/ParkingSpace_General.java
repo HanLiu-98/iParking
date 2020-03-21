@@ -1,4 +1,4 @@
-package xyz.hanliu.iparking.app.bean;
+package xyz.hanliu.iparking.home.bean;
 
 import com.alibaba.fastjson.annotation.JSONField;
 

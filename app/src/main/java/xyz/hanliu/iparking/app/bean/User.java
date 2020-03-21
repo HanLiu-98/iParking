@@ -8,6 +8,12 @@ public class User implements Serializable {
     private String fullname;
     private String password;
 
+    //后来增加的余额字段
+    private float balance;
+
+    /*
+     *getter方法
+     */
     public String getMobile() {
         return mobile;
     }
@@ -23,6 +29,14 @@ public class User implements Serializable {
     public String getPassword() {
         return password;
     }
+
+    public float getBalance() {
+        return balance;
+    }
+
+    /*
+     *setter方法
+     */
 
     public void setMobile(String mobile) {
         this.mobile = mobile;
@@ -40,6 +54,10 @@ public class User implements Serializable {
         this.password = password;
     }
 
+    public void setBalance(float balance) {
+        this.balance = balance;
+    }
+
     @Override
     public String toString() {
         return "User{" +
@@ -47,6 +65,7 @@ public class User implements Serializable {
                 ", nickname='" + nickname + '\'' +
                 ", fullname='" + fullname + '\'' +
                 ", password='" + password + '\'' +
+                ", balance=" + balance +
                 '}';
     }
 }
