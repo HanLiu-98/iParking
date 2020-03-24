@@ -206,7 +206,7 @@ public class SpaceDetailActivity extends AppCompatActivity {
                         /*订单提交成功，传回主键*/
                         else {
                             String[] strs = response.split("###");
-                            doPay(strs[1], strs[2]);
+                            doPay(strs[1], strs[2],SpaceDetailActivity.this);
                         }
 
 
@@ -219,12 +219,12 @@ public class SpaceDetailActivity extends AppCompatActivity {
     /**
      * 弹出支付界面，根据订单主键进行订单支付
      */
-    private void doPay(String spaceid, String tenantmobile) {
+    public  void doPay(String spaceid, String tenantmobile,Context mContext) {
         //弹出支付界面
         LayoutInflater inflater = getLayoutInflater();
         View payView = inflater.inflate(R.layout.paymoney, null);
         String titlemsg = "从钱包里支付" + String.valueOf(space.getPrice()) + "元";
-        new AlertDialog.Builder(this).setIcon(R.drawable.rmb).setTitle(titlemsg)
+        new AlertDialog.Builder(mContext).setIcon(R.drawable.rmb).setTitle(titlemsg)
                 .setView(payView).setPositiveButton("支付", new DialogInterface.OnClickListener() {
             /*点击支付按钮后进行的操作*/
             @Override
@@ -235,11 +235,10 @@ public class SpaceDetailActivity extends AppCompatActivity {
                 //输入密码正确&&余额够用
                 if (password.equals(GlobalData.user.getPassword()) && GlobalData.user.getBalance() >= space.getPrice()) {
                     //进行扣款操作
-                    ToastUtil.showMsg(SpaceDetailActivity.this, "进行扣款操作");
-                    payOrder(spaceid, tenantmobile);
+                    payOrder(spaceid, tenantmobile,mContext);
                 } else {
                     dialog.dismiss();
-                    AlertDialog.Builder builder = new AlertDialog.Builder(SpaceDetailActivity.this).
+                    AlertDialog.Builder builder = new AlertDialog.Builder(mContext).
                             setTitle("支付失败").
                             setMessage("请确保：\n1.支付密码正确无误。\n2.钱包余额充足。").
                             setIcon(R.drawable.ic_payfail);
@@ -259,14 +258,13 @@ public class SpaceDetailActivity extends AppCompatActivity {
     }
 
     /**
-     * 验证用户密码以及钱包余额后，进行扣款，修改双方账户余额，修改订单状态
+     * 验证用户密码以及钱包余额后，进行扣款，修改车位，修改订单状态
      */
-    private void payOrder(String spaceid, String tenantmobile) {
+    public void payOrder(String spaceid, String tenantmobile,Context mContext) {
         HashMap<String, String> params = new HashMap<>();
         params.put("spaceid", String.valueOf(spaceid));
         params.put("tenantMobile", GlobalData.user.getMobile());
         params.put("payTime", DateUtil.dateToStr(new Date()));
-//        params.put("status",String.valueOf(0));
 
         OkHttpUtils.post()
                 .url(Config.URL_PAYORDER)
@@ -275,14 +273,14 @@ public class SpaceDetailActivity extends AppCompatActivity {
                 .execute(new com.zhy.http.okhttp.callback.StringCallback() {
                     @Override
                     public void onError(Call call, Exception e, int id) {
-                        AlertDialogUtil.showNetErrorAlertDialog(SpaceDetailActivity.this, e.getMessage());
+                        AlertDialogUtil.showNetErrorAlertDialog(mContext, e.getMessage());
                     }
 
                     @Override
                     public void onResponse(String response, int id) {
                         /*事务执行失败*/
                         if (response.equals("failure")) {
-                            AlertDialog.Builder builder = new AlertDialog.Builder(SpaceDetailActivity.this).
+                            AlertDialog.Builder builder = new AlertDialog.Builder(mContext).
                                     setTitle("扣款失败!").
                                     setMessage("可能这个车位已经被别人租走了！").
                                     setIcon(R.drawable.ic_payfail);
@@ -296,11 +294,14 @@ public class SpaceDetailActivity extends AppCompatActivity {
                         }
                         /*事务执行成功！已经扣款了*/
                         else {
-                            AlertDialog.Builder builder = new AlertDialog.Builder(SpaceDetailActivity.this).
+                            String msg="已经通知业主为您开锁！\n\n" +
+                                    "温馨提示：\n\n" +
+                                    "1.在车位出租时间截止前，若因业主原因未能停车成功，可凭借证据发起退款！\n\n" +
+                                    "2.成功停车后请记得去个人中心确认！";
+                            AlertDialog.Builder builder = new AlertDialog.Builder(mContext).
                                     setTitle("付款成功!").
-                                    setMessage("已经通知业主为您开锁！在车位出租时间截止前，若因业主原因未能停车成功，可凭借证据发起退款！" +
-                                            "成功停车后请记得去个人中心确认！").
-                                    setIcon(R.drawable.ic_sentiment_very_satisfied_black_24dp);
+                                    setMessage(msg).
+                                    setIcon(R.drawable.ic_paysuccess);
                             builder.setPositiveButton("我知道了", new DialogInterface.OnClickListener() {
                                 @Override
                                 public void onClick(DialogInterface dialog, int which) {

@@ -15,12 +15,12 @@ import xyz.hanliu.iparking.R;
 import xyz.hanliu.iparking.user.bean.OrderPlus;
 import xyz.hanliu.iparking.utils.DateUtil;
 
-public class WaitPayOrderRecycleViewAdapter extends RecyclerView.Adapter<WaitPayOrderRecycleViewAdapter.ViewHolder> {
+public class WaitPayOrderRecyclerViewAdapter extends RecyclerView.Adapter<WaitPayOrderRecyclerViewAdapter.ViewHolder> {
     /*在RecyclerView里显示的待支付订单列表*/
     private List<OrderPlus> waitpayorders_list;
 
     /*适配器的构造函数*/
-    public WaitPayOrderRecycleViewAdapter(List<OrderPlus> list) {
+    public WaitPayOrderRecyclerViewAdapter(List<OrderPlus> list) {
         this.waitpayorders_list = list;
     }
 

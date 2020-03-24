@@ -83,7 +83,7 @@
 
         <!-- 10.我发布的车位界面 -->
         <activity
-            android:name=".user.activity.UserReleaseActivity"
+            android:name=".user.activity.MyReleaseActivity"
             android:label="我发布的车位" />
 
     </application>

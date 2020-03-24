@@ -19,6 +19,7 @@ import xyz.hanliu.iparking.base.BaseFragment;
 import xyz.hanliu.iparking.configuration.Config;
 import xyz.hanliu.iparking.data.GlobalData;
 import xyz.hanliu.iparking.user.activity.DepositActivity;
+import xyz.hanliu.iparking.user.activity.MyReleaseActivity;
 import xyz.hanliu.iparking.user.activity.OrdersActivity;
 import xyz.hanliu.iparking.user.activity.WithdrawalActivity;
 import xyz.hanliu.iparking.utils.AlertDialogUtil;
@@ -35,8 +36,10 @@ public class UserFragment extends BaseFragment {
     Button btn_waitpayorder;
     Button btn_payedorder;
 
+    Button btn_myrelease;
 
-    /**
+
+   /**
      * 填充布局，控件绑定
      */
     @Override
@@ -48,6 +51,7 @@ public class UserFragment extends BaseFragment {
         btn_withdrawal = view.findViewById(R.id.btn_withdrawal_user);
         btn_waitpayorder = view.findViewById(R.id.btn_waitpayorder_user);
         btn_payedorder = view.findViewById(R.id.btn_payedorder_user);
+        btn_myrelease=view.findViewById(R.id.btn_myrelease_user);
         return view;
     }
 
@@ -146,6 +150,16 @@ public class UserFragment extends BaseFragment {
                 mContext.startActivity(intent);
             }
         });
+
+        /*我发布的车位的响应事件*/
+        btn_myrelease.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(mContext, MyReleaseActivity.class);
+                mContext.startActivity(intent);
+            }
+        });
+
 
     }
 

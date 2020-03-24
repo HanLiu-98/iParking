@@ -141,7 +141,7 @@
 
 
         <Button
-            android:id="@+id/myrelease_user"
+            android:id="@+id/btn_myrelease_user"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@color/pickerview_bg_topbar"

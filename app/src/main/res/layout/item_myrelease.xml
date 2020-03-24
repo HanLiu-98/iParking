@@ -6,12 +6,11 @@
     android:layout_height="wrap_content"
     android:paddingLeft="6dp"
     android:paddingRight="6dp"
-    android:paddingBottom="10dp"
-    tools:context=".home.activity.SpaceDetailActivity">
+    android:paddingBottom="10dp">
 
 
     <LinearLayout
-        android:id="@+id/ll_waitpayorder"
+        android:id="@+id/ll_myrelease"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:background="@drawable/bg_wallet"
@@ -28,7 +27,7 @@
         app:layout_constraintTop_toTopOf="@id/guideline35">
 
         <LinearLayout
-            android:id="@+id/area_item_waitpay"
+            android:id="@+id/area_item_myrelease"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:divider="@drawable/divider"
@@ -37,7 +36,7 @@
             android:showDividers="end|beginning">
 
             <TextView
-                android:id="@+id/area_msg_item_payed"
+                android:id="@+id/area_msg_item_myrelease"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="车位所属区域："
@@ -45,7 +44,7 @@
                 android:textSize="15sp" />
 
             <TextView
-                android:id="@+id/tv_area_item_waitpay"
+                android:id="@+id/tv_area_item_myrelease"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
 
@@ -56,14 +55,14 @@
         </LinearLayout>
 
         <LinearLayout
-            android:id="@+id/positiondetail_item_waitpay"
+            android:id="@+id/positiondetail_item_myrelease"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:padding="5dp">
 
             <TextView
-                android:id="@+id/positiondetail_msg_item_waitpay"
+                android:id="@+id/positiondetail_msg_item_myrelease"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="车位详细地址："
@@ -71,7 +70,7 @@
                 android:textSize="15sp" />
 
             <TextView
-                android:id="@+id/tv_positiondetail_item_waitpay"
+                android:id="@+id/tv_positiondetail_item_myrelease"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="2"
@@ -80,14 +79,14 @@
         </LinearLayout>
 
         <LinearLayout
-            android:id="@+id/availabletime_item_waitpay"
+            android:id="@+id/availabletime_item_myrelease"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:padding="5dp">
 
             <TextView
-                android:id="@+id/availabletime_msg_item_waitpay"
+                android:id="@+id/availabletime_msg_item_myrelease"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="车位可用时间："
@@ -95,7 +94,7 @@
                 android:textSize="15sp" />
 
             <TextView
-                android:id="@+id/tv_availabletime_item_waitpay"
+                android:id="@+id/tv_availabletime_item_myrelease"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="2"
@@ -104,47 +103,23 @@
         </LinearLayout>
 
         <LinearLayout
-            android:id="@+id/createtime_item_waitpay"
+            android:id="@+id/price_item_myrelease"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:padding="5dp">
 
             <TextView
-                android:id="@+id/createtime_msg_item_waitpay"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="订单提交时间："
-                android:textColor="@color/pickerview_topbar_title"
-
-                android:textSize="15sp" />
-
-            <TextView
-                android:id="@+id/tv_createtime_item_waitpay"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="2"
-                android:gravity="center"
-                android:text=" " />
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/price_item_waitpay"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:padding="5dp">
-
-            <TextView
-                android:id="@+id/price_msg_item_waitpay"
+                android:id="@+id/price_msg_item_myrelease"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="出租价格："
                 android:textColor="@color/pickerview_topbar_title"
+
                 android:textSize="15sp" />
 
             <TextView
-                android:id="@+id/tv_price_item_waitpay"
+                android:id="@+id/tv_price_item_myrelease"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="2"
@@ -152,9 +127,34 @@
                 android:text=" " />
         </LinearLayout>
 
+        <LinearLayout
+            android:id="@+id/status_item_myrelease"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:padding="5dp">
+
+            <TextView
+                android:id="@+id/status_msg_item_myrelease"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="车位状态："
+                android:textColor="@color/pickerview_topbar_title"
+                android:textSize="15sp" />
+
+            <TextView
+                android:id="@+id/tv_status_item_myrelease"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="2"
+                android:gravity="center"
+                android:text=" "
+                android:textColor="@color/colorAccent" />
+        </LinearLayout>
+
 
         <LinearLayout
-            android:id="@+id/btn_item_waitpay"
+            android:id="@+id/btn_item_myrelease"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
@@ -162,18 +162,25 @@
             android:showDividers="none">
 
             <Button
-                android:id="@+id/btn_showspacedetail_item_waitpay"
+                android:id="@+id/btn_showspacedetail_item_myrelease"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="查看车位详情" />
 
             <Button
-                android:id="@+id/btn_pay_item_waitpay"
+                android:id="@+id/btn_modifyprice_item_myrelease"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="立即付款" />
+                android:text="修改价格" />
+
+            <Button
+                android:id="@+id/btn_delete_item_myrelease"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="撤销发布" />
         </LinearLayout>
 
 

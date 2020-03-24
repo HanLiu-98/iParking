@@ -1,8 +1,13 @@
 package xyz.hanliu.iparking.user.activity;
 
+import android.app.AlertDialog;
+import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -13,6 +18,7 @@ import com.alibaba.fastjson.JSON;
 import com.zhy.http.okhttp.OkHttpUtils;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 
@@ -24,9 +30,10 @@ import xyz.hanliu.iparking.configuration.Config;
 import xyz.hanliu.iparking.data.GlobalData;
 import xyz.hanliu.iparking.home.activity.SpaceDetailActivity;
 import xyz.hanliu.iparking.user.adapter.PayedOrderRecyclerViewAdapter;
-import xyz.hanliu.iparking.user.adapter.WaitPayOrderRecycleViewAdapter;
+import xyz.hanliu.iparking.user.adapter.WaitPayOrderRecyclerViewAdapter;
 import xyz.hanliu.iparking.user.bean.OrderPlus;
 import xyz.hanliu.iparking.utils.AlertDialogUtil;
+import xyz.hanliu.iparking.utils.DateUtil;
 import xyz.hanliu.iparking.utils.ToastUtil;
 
 public class OrdersActivity extends AppCompatActivity {
@@ -129,14 +136,16 @@ public class OrdersActivity extends AppCompatActivity {
                 }
 
                 @Override
-                public void OnShowDetailButtonClick(int position) {
-//                    ToastUtil.showMsg(OrdersActivity.this,"执行查看详情操作");
+                public void OnShowDetailButtonClick(int position)
+                {
                     showSpaceDetail(order_List.get(position).getId());
                 }
 
                 @Override
-                public void OnFinishParkingButtonClick(int position) {
-                    ToastUtil.showMsg(OrdersActivity.this, "执行完成停车操作");
+                public void OnFinishParkingButtonClick(int position)
+                {
+                    /*执行完成停车操作*/
+                    ToastUtil.showMsg(OrdersActivity.this, "");
                 }
             });
             rv_orders.setAdapter(adapter);
@@ -165,15 +174,24 @@ public class OrdersActivity extends AppCompatActivity {
             rv_orders.setVisibility(View.VISIBLE);
             LinearLayoutManager layoutManager = new LinearLayoutManager(this);
             rv_orders.setLayoutManager(layoutManager);
-            WaitPayOrderRecycleViewAdapter adapter = new WaitPayOrderRecycleViewAdapter(order_List);
-            adapter.setOnWaitPayOrderRecyclerView(new WaitPayOrderRecycleViewAdapter.OnWaitPayOrderRecyclerView() {
+            WaitPayOrderRecyclerViewAdapter adapter = new WaitPayOrderRecyclerViewAdapter(order_List);
+            adapter.setOnWaitPayOrderRecyclerView(new WaitPayOrderRecyclerViewAdapter.OnWaitPayOrderRecyclerView() {
                 @Override
-                public void OnPayButtonClick(int position) {
-                    ToastUtil.showMsg(OrdersActivity.this, "okk1");
+                public void OnPayButtonClick(int position)
+                {
+                    /**
+                     * 进行支付操作
+                     */
+                    doPay(String.valueOf(order_List.get(position).getId()),GlobalData.user.getMobile(),
+                            OrdersActivity.this,order_List.get(position).getPrice());
                 }
 
                 @Override
-                public void OnShowDetailButtonClick(int position) {
+                public void OnShowDetailButtonClick(int position)
+                {
+                    /**
+                     * 查看车位的详情
+                     */
 
                     showSpaceDetail(order_List.get(position).getId());
                 }
@@ -182,7 +200,8 @@ public class OrdersActivity extends AppCompatActivity {
 
         }
         /*如果当前用户没有待支付订单1.RecyclerView设置消失；2.TextView设置可见*/
-        else {
+        else
+        {
             rv_orders.setVisibility(View.GONE);
             tv_noorder.setVisibility(View.VISIBLE);
         }
@@ -201,4 +220,105 @@ public class OrdersActivity extends AppCompatActivity {
     }
 
 
+    /**
+     * 弹出支付界面，根据订单主键进行订单支付
+     */
+    public  void doPay(String spaceid, String tenantmobile, Context mContext,float price)
+    {
+        //弹出支付界面
+        LayoutInflater inflater = getLayoutInflater();
+        View payView = inflater.inflate(R.layout.paymoney, null);
+        String titlemsg = "从钱包里支付" + String.valueOf(price) + "元";
+        new AlertDialog.Builder(mContext).setIcon(R.drawable.rmb).setTitle(titlemsg)
+                .setView(payView).setPositiveButton("支付", new DialogInterface.OnClickListener() {
+            /*点击支付按钮后进行的操作*/
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                //获取到用户输入的支付密码
+                EditText ev_pass = payView.findViewById(R.id.et_password_pay);
+                String password = ev_pass.getText().toString();
+                //输入密码正确&&余额够用
+                if (password.equals(GlobalData.user.getPassword()) && GlobalData.user.getBalance() >= price) {
+                    //进行扣款操作
+                    payOrder(spaceid, tenantmobile,mContext);
+                }
+                else
+                {
+                    dialog.dismiss();
+                    AlertDialog.Builder builder = new AlertDialog.Builder(mContext).
+                            setTitle("支付失败").
+                            setMessage("请确保：\n1.支付密码正确无误。\n2.钱包余额充足。").
+                            setIcon(R.drawable.ic_payfail);
+                    builder.setPositiveButton("我知道了", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            dialog.cancel();
+                        }
+                    });
+                    builder.show();
+                }
+            }
+        }).create().show();
+
+    }
+
+    /**
+     * 验证用户密码以及钱包余额后，进行扣款，修改双方账户余额，修改订单状态
+     */
+    public void payOrder(String spaceid, String tenantmobile,Context mContext)
+    {
+        HashMap<String, String> params = new HashMap<>();
+        params.put("spaceid", String.valueOf(spaceid));
+        params.put("tenantMobile", GlobalData.user.getMobile());
+        params.put("payTime", DateUtil.dateToStr(new Date()));
+
+        OkHttpUtils.post()
+                .url(Config.URL_PAYORDER)
+                .params(params)
+                .build()
+                .execute(new com.zhy.http.okhttp.callback.StringCallback() {
+                    @Override
+                    public void onError(Call call, Exception e, int id) {
+                        AlertDialogUtil.showNetErrorAlertDialog(mContext, e.getMessage());
+                    }
+
+                    @Override
+                    public void onResponse(String response, int id) {
+                        /*事务执行失败*/
+                        if (response.equals("failure")) {
+                            AlertDialog.Builder builder = new AlertDialog.Builder(mContext).
+                                    setTitle("扣款失败!").
+                                    setMessage("可能这个车位已经被别人租走了！").
+                                    setIcon(R.drawable.ic_payfail);
+                            builder.setPositiveButton("我知道了", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    dialog.cancel();
+                                }
+                            });
+                            builder.show();
+                        }
+                        /*事务执行成功！已经扣款了*/
+                        else
+                        {
+                            String msg="已经通知业主为您开锁！\n\n" +
+                                    "温馨提示：\n\n" +
+                                    "1.在车位出租时间截止前，若因业主原因未能停车成功，可凭借证据发起退款！\n\n" +
+                                    "2.成功停车后请记得去个人中心确认！";
+                            AlertDialog.Builder builder = new AlertDialog.Builder(mContext).
+                                    setTitle("付款成功!").
+                                    setMessage(msg).
+                                    setIcon(R.drawable.ic_paysuccess);
+                            builder.setPositiveButton("我知道了", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    dialog.cancel();
+                                    requestOrders(0);
+                                }
+                            });
+                            builder.show();
+                        }
+                    }
+                });
+    }
 }
